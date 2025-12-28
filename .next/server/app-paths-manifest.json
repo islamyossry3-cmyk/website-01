@@ -2,5 +2,7 @@
   "/page": "app/page.js",
   "/team/page": "app/team/page.js",
   "/resources/page": "app/resources/page.js",
-  "/contact/page": "app/contact/page.js"
+  "/contact/page": "app/contact/page.js",
+  "/case-studies/page": "app/case-studies/page.js",
+  "/methodology/page": "app/methodology/page.js"
 }
