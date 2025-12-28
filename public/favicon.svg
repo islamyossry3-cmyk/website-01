@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20.96 10.39">
   <defs>
-    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#0c554a"/>
-      <stop offset="1" stop-color="#f67782"/>
-    </linearGradient>
+    <style>
+      .cls-1 {
+        fill: #f67782;
+      }
+    </style>
   </defs>
-  <rect width="120" height="120" rx="28" fill="#070A0E"/>
-  <circle cx="60" cy="60" r="34" fill="none" stroke="url(#g)" stroke-width="10"/>
-  <path d="M46 78V42h18c10 0 16 6 16 15 0 9-6 15-16 15H58v6H46zm12-18h6c4 0 7-2 7-5s-3-5-7-5h-6v10z" fill="#fff"/>
+  <path class="cls-1" d="M19.83,1.18h-10.15v2.61h2.35c-.34.77-.91,1.42-1.64,1.88-.97.6-2.12.79-3.23.53-1.11-.26-2.05-.94-2.66-1.91-.58-.93-.77-2.05-.55-3.11H.9c-.19,1.63.16,3.3,1.04,4.71,1.03,1.66,2.64,2.81,4.54,3.26,1.9.44,3.86.12,5.51-.91,1.2-.75,2.14-1.81,2.73-3.05l2.81,3.12,2.14-2.14-2.37-2.37h2.53V1.18Z"/>
 </svg>
