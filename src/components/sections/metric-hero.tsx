@@ -78,7 +78,7 @@ export function MetricHero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-[30px] bg-[#0c554a]" style={{ zIndex: 25 }} />
+      <div className="absolute bottom-0 left-0 w-full h-[10%] bg-[#071815]" style={{ zIndex: 25 }} />
     </section>
   );
 }

@@ -1386,6 +1386,9 @@ video {
 .h-\[30px\] {
   height: 30px;
 }
+.h-\[10\%\] {
+  height: 10%;
+}
 .max-h-\[90vh\] {
   max-height: 90vh;
 }
@@ -1837,6 +1840,10 @@ video {
 .bg-\[\#0c554a\] {
   --tw-bg-opacity: 1;
   background-color: rgb(12 85 74 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#071815\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(7 24 21 / var(--tw-bg-opacity, 1));
 }
 .bg-\[linear-gradient\(135deg\2c rgba\(12\2c 85\2c 74\2c 0\.06\)\2c rgba\(246\2c 119\2c 130\2c 0\.05\)\)\] {
   background-image: linear-gradient(135deg,rgba(12,85,74,0.06),rgba(246,119,130,0.05));
