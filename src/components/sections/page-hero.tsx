@@ -1,10 +1,31 @@
 'use client';
 
-import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/cn';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+// import { GradientBg } from '../effects/gradient-bg'; // Removed GradientBg import
+import { Reveal } from '../effects/reveal';
+import { GlassCard } from '../ui/glass-card';
 import { motion } from 'framer-motion';
-import { LiquidBlobs } from '@/components/effects/liquid-blobs';
+import Spline from '@splinetool/react-spline'; // Import Spline
+
+interface PageHeroProps {
+  kicker?: string;
+  title: string;
+  subtitle?: string;
+  primaryCta?: {
+    label: string;
+    href: string;
+  };
+  secondaryCta?: {
+    label: string;
+    href: string;
+  };
+  right?: React.ReactNode;
+  className?: string;
+  rightWrapperClassName?: string; // New prop for custom right wrapper classes
+}
 
 export function PageHero({
   kicker,
@@ -12,100 +33,79 @@ export function PageHero({
   subtitle,
   primaryCta,
   secondaryCta,
-  right
-}: {
-  kicker?: string;
-  title: string;
-  subtitle: string;
-  primaryCta?: { label: string; href: string };
-  secondaryCta?: { label: string; href: string };
-  right?: React.ReactNode;
-}) {
+  right,
+  className,
+  rightWrapperClassName // Destructure the new prop
+}: PageHeroProps) {
   return (
-    <section className="relative min-h-[80vh] lg:min-h-[90vh] overflow-hidden pt-20 lg:pt-32">
-      <Image
-        src="/hero-bg.jpg"
-        alt=""
-        fill
-        priority
-        quality={85}
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-brand-dark/40 z-0" />
-      <div className="noise-overlay z-0" />
-      <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-brand-blue/10 blur-3xl z-0" />
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-brand-pink/10 blur-3xl z-0" />
-      <LiquidBlobs className="absolute inset-0 z-10 pointer-events-none" count={15} />
+    <section className={cn('relative overflow-hidden', className)}>
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none">
+        <Spline scene="https://prod.spline.design/bs1dSedV2eKxt4JV/scene.splinecode" />
+      </div>
+      <div className="container relative z-10 mx-auto px-6 py-24">
+        <div className={cn(
+          'flex flex-col-reverse justify-between gap-10 md:flex-row md:gap-20',
+          !right && 'items-center text-center',
+          right && 'items-center'
+        )}>
+          <div className={cn(
+            'w-full',
+            right ? 'md:w-3/5' : 'max-w-4xl mx-auto'
+          )}>
+            <Reveal>
+              {kicker && (
+                <div className="mb-4 text-sm font-semibold text-brand-blue uppercase tracking-wider text-slate-300">
+                  {kicker}
+                </div>
+              )}
+            </Reveal>
 
-      <div className="relative z-20 mx-auto max-w-7xl px-6 py-12">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <div className="space-y-6 lg:space-y-8">
-            {kicker && (
-              <div className="inline-flex items-center gap-2 rounded-full border border-brand-sage/30 bg-brand-dark/50 px-4 py-2 text-sm font-semibold text-brand-blue backdrop-blur">
-                {kicker}
-              </div>
+            <Reveal>
+              <h1 className="text-4xl font-extrabold tracking-tight text-white md:text-6xl">
+                {title}
+              </h1>
+            </Reveal>
+
+            {subtitle && (
+              <Reveal>
+                <p className="mt-6 text-lg text-slate-300">
+                  {subtitle}
+                </p>
+              </Reveal>
             )}
 
-            <motion.h1
-              className="font-display text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <span className="bg-gradient-to-r from-white via-white/90 to-white bg-clip-text text-transparent">
-                {title}
-              </span>
-            </motion.h1>
-
-            <motion.p
-              className="max-w-xl text-base sm:text-lg leading-relaxed text-white/80"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
-            >
-              {subtitle}
-            </motion.p>
-
             {(primaryCta || secondaryCta) && (
-              <motion.div
-                className="flex flex-col gap-3 sm:flex-row sm:gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-              >
-                {primaryCta && (
-                  <Link
-                    href={primaryCta.href}
-                    className="group inline-flex items-center justify-center gap-2 rounded-xl bg-brand-pink px-6 py-3 sm:py-4 text-sm sm:text-base font-bold text-white shadow-lg transition hover:-translate-y-1 hover:bg-brand-pink/90"
-                  >
-                    {primaryCta.label}
-                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 stroke-[1.5px] transition group-hover:translate-x-1" />
-                  </Link>
-                )}
-                {secondaryCta && (
-                  <Link
-                    href={secondaryCta.href}
-                    className="group inline-flex items-center justify-center gap-2 rounded-xl border border-brand-sage/30 bg-white/5 px-6 py-3 sm:py-4 text-sm sm:text-base font-bold text-white backdrop-blur transition hover:-translate-y-1"
-                  >
-                    {secondaryCta.label}
-                  </Link>
-                )}
-              </motion.div>
+              <Reveal>
+                <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                  {primaryCta && (
+                    <Button asChild size="lg">
+                      <Link href={primaryCta.href}>{primaryCta.label}</Link>
+                    </Button>
+                  )}
+                  {secondaryCta && (
+                    <Button asChild variant="ghost" size="lg">
+                      <Link href={secondaryCta.href}>
+                        {secondaryCta.label}
+                        <ArrowRight className="ml-2" />
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </Reveal>
             )}
           </div>
 
           {right && (
-            <div className="relative hidden lg:block">
+            <div className={cn("relative w-full h-full md:w-2/5", rightWrapperClassName)}> {/* Added h-full here */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative"
               >
                 {right}
-              </motion.div>
 
-              <div className="absolute -right-8 -top-8 h-32 w-32 rounded-2xl border border-brand-sage/20 bg-brand-dark/50 backdrop-blur" />
-              <div className="absolute -bottom-8 -left-8 h-24 w-24 rotate-12 rounded-2xl border border-brand-sage/20 bg-brand-dark/50 backdrop-blur" />
+              </motion.div>
             </div>
           )}
         </div>
