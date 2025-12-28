@@ -131,13 +131,13 @@ export function Header() {
             exit={{ opacity: 0 }}
             className="lg:hidden"
           >
-            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+            <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[60]" onClick={() => setMobileOpen(false)} />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 260, damping: 24 }}
-              className="fixed right-0 top-0 h-full w-[92%] max-w-sm bg-white p-6 shadow-2xl"
+              className="fixed right-0 top-0 h-full w-[92%] max-w-sm bg-white p-6 shadow-2xl z-[70]"
             >
               <div className="flex items-center justify-between">
                 <Image src="/brand/logo.svg" alt={site.name} width={150} height={40} className="h-8 w-auto" />
