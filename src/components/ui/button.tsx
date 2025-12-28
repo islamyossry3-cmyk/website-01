@@ -1,51 +1,29 @@
 import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/cn';
 
-export const buttonClasses = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-blue disabled:pointer-events-none disabled:opacity-50',
-  {
-    variants: {
-      variant: {
-        primary:
-          'bg-brand-green text-white shadow hover:bg-brand-blue/90',
-        secondary:
-          'bg-brand-green text-white shadow-sm hover:bg-brand-green/90',
-        ghost:
-          'text-slate-300 hover:bg-white/10 hover:text-white',
-        link:
-          'text-brand-blue underline-offset-4 hover:underline',
-      },
-      size: {
-        sm: 'h-8 px-3 text-xs',
-        md: 'h-9 px-4 py-2.5',
-        lg: 'h-10 px-8',
-      },
-    },
-    defaultVariants: {
-      variant: 'primary',
-      size: 'md',
-    },
-  }
-);
+type Variant = 'primary' | 'secondary' | 'ghost';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonClasses> {
-  asChild?: boolean;
+export function buttonClasses(variant: Variant = 'primary') {
+  const base =
+    'inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition will-change-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-pink/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent';
+  const variants: Record<Variant, string> = {
+    primary:
+      'bg-brand-green text-white shadow-glow hover:-translate-y-0.5 hover:shadow-[0_18px_60px_rgba(12,85,74,0.25)] active:translate-y-0',
+    secondary:
+      'bg-white/10 text-white ring-1 ring-white/15 backdrop-blur hover:bg-white/15 hover:-translate-y-0.5 active:translate-y-0',
+    ghost:
+      'bg-transparent text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50 hover:-translate-y-0.5 active:translate-y-0'
+  };
+  return cn(base, variants[variant]);
 }
 
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: Variant;
+};
+
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button';
-    return (
-      <Comp
-        className={cn(buttonClasses({ variant, size }), className)}
-        ref={ref}
-        {...props}
-      />
-    );
+  ({ className, variant = 'primary', ...props }, ref) => {
+    return <button ref={ref} className={cn(buttonClasses(variant), className)} {...props} />;
   }
 );
 Button.displayName = 'Button';
